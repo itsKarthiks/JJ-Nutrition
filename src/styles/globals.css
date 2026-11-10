@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-white: #FFFFFF;
+    --color-surface-light: #F3F9FD;
+    --color-surface-pale: #E8F5FC;
+    --color-surface-decorative: #D9EFFB;
+    --color-sky-blue: #42A9E5;
+    --color-strong-blue: #0789D2;
+    --color-deep-navy: #111827;
+    --color-slate: #333333;
+    --color-body: #1A1A1A;
+    --color-subtle: #555555;
+    --color-border-blue: #DCE8F1;
+
+    /* Semantic mapping */
+    --color-cream: #FFFFFF;
+    --color-dark: #111827;
+    --color-accent: #42A9E5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Clash Grotesk', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    background-color: #FAF9F6;
+    background-image: 
+      linear-gradient(rgba(250, 249, 246, 0.70), rgba(250, 249, 246, 0.70)),
+      url('/white-wall-textures.webp');
+    background-repeat: repeat;
+    background-size: auto, 750px 750px;
+    color: #1A1A1A;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    color: #111827;
+  }
+}
+
+/* Custom scrollbar in sky blue */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3F9FD;
+}
+::-webkit-scrollbar-thumb {
+  background: #42A9E5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0789D2;
+}
+
+/* Font utilities for the marquee brand identities */
+.font-praise {
+  font-family: 'Praise', cursive, sans-serif;
+}
+.font-abhaya {
+  font-family: 'Abhaya Libre', Georgia, serif;
+}
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+.font-qahiri {
+  font-family: 'Qahiri', cursive, sans-serif;
+}
+.font-sen {
+  font-family: 'Sen', sans-serif;
+}
+.font-acme {
+  font-family: 'Acme', sans-serif;
+}
+.font-montserrat {
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Realistic Glassmorphism Navbar */
+.realistic-glass-navbar {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.58),
+    rgba(255, 255, 255, 0.22) 45%,
+    rgba(225, 243, 255, 0.34)
+  );
+  backdrop-filter: blur(10px) saturate(155%);
+  -webkit-backdrop-filter: blur(10px) saturate(155%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 8px 30px rgba(20, 55, 85, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(120, 180, 220, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+.realistic-glass-navbar-scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0.38) 45%,
+    rgba(225, 243, 255, 0.45)
+  );
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 12px 36px rgba(20, 55, 85, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(120, 180, 220, 0.20);
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================================
+   Refractive Glass Lens Navigation Optics (Desktop & iPad)
+   ========================================================================= */
+.glass-lens-optic {
+  background: radial-gradient(
+    125% 135% at 50% 12%,
+    rgba(255, 255, 255, 0.90) 0%,
+    rgba(240, 248, 255, 0.58) 52%,
+    rgba(217, 239, 251, 0.38) 100%
+  );
+  backdrop-filter: blur(8px) saturate(150%) brightness(105%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%) brightness(105%);
+  border: 1px solid rgba(255, 255, 255, 0.96);
+  box-shadow:
+    /* Specular crest top edge highlight */
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 1.0),
+    /* Soft bottom refraction rim */
+    inset 0 -1px 1px 0 rgba(16, 36, 61, 0.05),
+    /* Chromatic dispersion: cyan/sky on left, soft violet on right */
+    inset 1.5px 0 2px 0 rgba(66, 169, 229, 0.44),
+    inset -1.5px 0 2px 0 rgba(155, 115, 230, 0.34),
+    /* Physical glass elevation */
+    0 2px 8px -1px rgba(16, 36, 61, 0.07),
+    0 8px 18px -2px rgba(66, 169, 229, 0.16);
+}
+
+.glass-lens-glare {
+  position: absolute;
+  top: 1.5px;
+  left: 12%;
+  right: 12%;
+  height: 42%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Subtle chromatic aberration on text magnified under the lens */
+.lens-text-chromatic {
+  text-shadow:
+    -0.4px 0 0.5px rgba(7, 137, 210, 0.42),
+    0.4px 0 0.5px rgba(150, 95, 220, 0.32);
+}
+
