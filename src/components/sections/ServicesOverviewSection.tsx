@@ -466,18 +466,50 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.16,
+        staggerChildren: 0.14,
+        delayChildren: 0.05,
       },
     },
   };
 
   const headingLineVariants: Variants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: 14 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.65,
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
+    },
+  };
+
+  // Staggered motion variants for smooth service-to-service content transitions inside the detail card
+  const cardContentContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04,
+        delayChildren: 0.02,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.18,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
+    },
+  };
+
+  const cardContentItemVariants: Variants = {
+    hidden: { opacity: 0, y: 8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       },
     },
@@ -499,7 +531,7 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
           initial={shouldReduceMotion ? {} : 'hidden'}
           whileInView={shouldReduceMotion ? {} : 'visible'}
           viewport={{ once: true, margin: '-15% 0px -20% 0px' }}
-          className="font-sans text-xl sm:text-2xl md:text-[44px] lg:text-5xl text-[#111827] uppercase font-normal leading-tight mb-1.5 md:mb-4 text-center"
+          className="font-sans text-[22px] sm:text-[26px] md:text-[46px] lg:text-[52px] text-[#111827] uppercase font-normal leading-tight mb-2 md:mb-4 text-center"
         >
           <motion.span variants={headingLineVariants} className="block">
             TARGETED CLINICAL NUTRITION
@@ -517,7 +549,7 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
             baseOffset={14}
             baseOpacity={0.15}
             as="p"
-            textClassName="text-[#1A1A1A] text-xs sm:text-sm md:text-lg leading-relaxed font-normal text-center font-montserrat line-clamp-2 md:line-clamp-none"
+            textClassName="text-[#1A1A1A] text-[13.5px] sm:text-[15px] md:text-[19px] lg:text-[20px] leading-relaxed font-normal text-center font-montserrat line-clamp-2 md:line-clamp-none"
             containerClassName="text-center"
           >
             Every protocol is grounded in peer-reviewed clinical research. We address the biological root
@@ -576,7 +608,7 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
 
                       {/* Sequence Number: Smaller and visually secondary */}
                       <span
-                        className={`font-mono text-xs lg:text-[13px] mr-3.5 transition-colors duration-200 flex-shrink-0 ${
+                        className={`font-mono text-[13px] lg:text-[14px] mr-3.5 transition-colors duration-200 flex-shrink-0 ${
                           isActive
                             ? 'text-accent font-semibold'
                             : 'text-[#555555] font-normal group-hover:text-[#111827]'
@@ -585,9 +617,9 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                         {service.number}
                       </span>
 
-                      {/* Service Title — Montserrat Regular (400) / Active Medium (500), 17-18px desktop, 16-17px iPad */}
+                      {/* Service Title — Montserrat Regular (400) / Active Medium (500), slightly enlarged for high readability */}
                       <span
-                        className={`font-montserrat text-[16px] md:text-[17px] xl:text-[18px] leading-snug transition-all duration-200 line-clamp-1 ${
+                        className={`font-montserrat text-[17px] md:text-[18px] xl:text-[19px] leading-snug transition-all duration-200 line-clamp-1 ${
                           isActive
                             ? 'text-[#111827] font-medium tracking-tight'
                             : 'text-[#333333] font-normal group-hover:text-[#111827]'
@@ -631,9 +663,9 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                       initial={false}
                       animate={{
                         opacity: isCur ? 1 : 0,
-                        scale: isCur ? 1 : 1.02,
+                        scale: isCur ? 1 : 1.015,
                       }}
-                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute inset-0 bg-cover bg-bottom will-change-transform"
                       style={{
                         backgroundImage: `url(${
@@ -651,42 +683,54 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`content-${activeService.id}`}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                    variants={cardContentContainerVariants}
+                    initial={shouldReduceMotion ? undefined : 'hidden'}
+                    animate="visible"
+                    exit={shouldReduceMotion ? undefined : 'exit'}
                     className="flex flex-col justify-between h-full"
                   >
                     <div>
                       {/* Service Title */}
-                      <h3 className="font-sans text-2xl lg:text-3xl xl:text-[34px] text-[#111827] uppercase font-normal leading-tight mb-2 pt-1">
+                      <motion.h3
+                        variants={cardContentItemVariants}
+                        className="font-sans text-[26px] lg:text-[32px] xl:text-[36px] text-[#111827] uppercase font-normal leading-tight mb-2 pt-1"
+                      >
                         {activeService.title}
-                      </h3>
+                      </motion.h3>
 
                       {/* Tagline / Subtitle */}
-                      <p className="text-accent-strong text-xs lg:text-[13px] font-medium font-montserrat mb-3.5 leading-snug">
+                      <motion.p
+                        variants={cardContentItemVariants}
+                        className="text-accent-strong text-[13.5px] lg:text-[14.5px] xl:text-[15px] font-medium font-montserrat mb-3.5 leading-snug"
+                      >
                         {activeService.tagline}
-                      </p>
+                      </motion.p>
 
                       {/* Description */}
-                      <p className="text-[#1A1A1A] text-xs lg:text-sm leading-relaxed font-normal mb-5 max-w-2xl font-montserrat">
+                      <motion.p
+                        variants={cardContentItemVariants}
+                        className="text-[#1A1A1A] text-[13.5px] lg:text-[15px] xl:text-[16px] leading-relaxed font-normal mb-5 max-w-2xl font-montserrat"
+                      >
                         {activeService.description}
-                      </p>
+                      </motion.p>
 
                       {/* Clinical Outcomes & Synergists Matrix */}
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 mb-5">
+                      <motion.div
+                        variants={cardContentItemVariants}
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 mb-5"
+                      >
                         {/* Expected Clinical Outcomes */}
                         <div className="p-3.5 lg:p-4 rounded-2xl bg-white/90 border border-[#DCE8F1] shadow-2xs backdrop-blur-xs">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-accent block mb-2 font-montserrat">
+                          <span className="text-[11.5px] lg:text-[12px] font-bold uppercase tracking-wider text-accent block mb-2 font-montserrat">
                             Expected Clinical Outcomes
                           </span>
                           <ul className="space-y-1.5">
                             {activeService.expectedOutcomes.slice(0, 2).map((item, i) => (
                               <li
                                 key={i}
-                                className="flex items-start gap-2 text-xs text-[#1A1A1A] font-montserrat leading-snug"
+                                className="flex items-start gap-2 text-[13px] lg:text-[14px] text-[#1A1A1A] font-montserrat leading-snug"
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1 flex-shrink-0" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                                 <span className="line-clamp-2">{item}</span>
                               </li>
                             ))}
@@ -695,45 +739,50 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
 
                         {/* Therapeutic Synergists */}
                         <div className="p-3.5 lg:p-4 rounded-2xl bg-white/90 border border-[#DCE8F1] shadow-2xs backdrop-blur-xs">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#111827] block mb-2 font-montserrat">
+                          <span className="text-[11.5px] lg:text-[12px] font-bold uppercase tracking-wider text-[#111827] block mb-2 font-montserrat">
                             Therapeutic Synergists
                           </span>
                           <ul className="space-y-1.5">
                             {activeService.therapeuticSynergists.slice(0, 2).map((item, i) => (
                               <li
                                 key={i}
-                                className="flex items-start gap-2 text-xs text-[#1A1A1A] font-montserrat leading-snug"
+                                className="flex items-start gap-2 text-[13px] lg:text-[14px] text-[#1A1A1A] font-montserrat leading-snug"
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-1 flex-shrink-0" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-strong mt-1.5 flex-shrink-0" />
                                 <span className="line-clamp-2">{item}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
-                      </div>
+                      </motion.div>
 
                       {/* Ideal Clinical Candidate */}
-                      <div className="text-xs text-[#555555] font-montserrat mb-2">
-                        <strong className="text-[#111827] font-semibold uppercase tracking-wider text-[10px] block mb-1">
+                      <motion.div
+                        variants={cardContentItemVariants}
+                        className="text-[13px] lg:text-[14px] text-[#555555] font-montserrat mb-2"
+                      >
+                        <strong className="text-[#111827] font-semibold uppercase tracking-wider text-[11px] lg:text-[11.5px] block mb-1">
                           Ideal Clinical Candidate:
                         </strong>
                         <p className="line-clamp-2 text-[#1A1A1A]">{activeService.idealFor}</p>
-                      </div>
+                      </motion.div>
                     </div>
 
                     {/* Action CTA Buttons: Only Book Consultation is retained */}
                     <div className="flex items-center justify-end pt-4 border-t border-[#DCE8F1]">
-                      <button
+                      <motion.button
+                        whileHover={shouldReduceMotion ? {} : { y: -2, scale: 1.01 }}
+                        whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                         onClick={() => onBookService(activeService.id)}
                         className="group inline-flex items-center justify-between gap-3 pl-6 pr-2 py-2 rounded-full bg-accent text-white hover:bg-accent-strong transition-all duration-300 shadow-[0_4px_16px_rgba(66,169,229,0.3)] hover:shadow-[0_6px_22px_rgba(7,137,210,0.4)] cursor-pointer select-none active:scale-[0.98]"
                       >
-                        <span className="font-montserrat text-xs sm:text-sm font-semibold tracking-wide">
+                        <span className="font-montserrat text-[13.5px] sm:text-[14.5px] font-semibold tracking-wide">
                           Book Consultation
                         </span>
                         <span className="w-8 h-8 rounded-full bg-white/20 group-hover:bg-white/30 flex items-center justify-center transition-all duration-300 flex-shrink-0">
                           <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </span>
-                      </button>
+                      </motion.button>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -765,7 +814,7 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                   <button
                     key={`mobile-pill-${service.id}`}
                     onClick={() => handleSelectIndex(index)}
-                    className={`px-3.5 py-1.5 rounded-full text-[14px] sm:text-[15px] font-montserrat whitespace-nowrap transition-all duration-200 cursor-pointer flex-shrink-0 ${
+                    className={`px-4 py-2 rounded-full text-[14.5px] sm:text-[15.5px] font-montserrat whitespace-nowrap transition-all duration-200 cursor-pointer flex-shrink-0 ${
                       isActive
                         ? 'bg-accent text-white font-medium shadow-xs'
                         : 'bg-white text-[#333333] font-normal border border-border-blue'
@@ -805,9 +854,12 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                     <motion.div
                       key={`mobile-bg-${srv.id}`}
                       initial={false}
-                      animate={{ opacity: isCur ? 1 : 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 bg-cover bg-bottom"
+                      animate={{
+                        opacity: isCur ? 1 : 0,
+                        scale: isCur ? 1 : 1.015,
+                      }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0 bg-cover bg-bottom will-change-transform"
                       style={{
                         backgroundImage: `url(${
                           SERVICE_BACKGROUND_IMAGES[srv.id] ||
@@ -824,57 +876,70 @@ export const ServicesOverviewSection: React.FC<ServicesOverviewSectionProps> = (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`mobile-content-${activeService.id}`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.28 }}
+                    variants={cardContentContainerVariants}
+                    initial={shouldReduceMotion ? undefined : 'hidden'}
+                    animate="visible"
+                    exit={shouldReduceMotion ? undefined : 'exit'}
                     className="flex flex-col justify-between h-full"
                   >
                     {/* Card Top: Title & Tagline (flex-shrink-0) */}
                     <div className="flex-shrink-0">
-                      <h3 className="font-sans text-xl sm:text-2xl text-[#111827] uppercase font-normal leading-tight mb-1 pt-1">
+                      <motion.h3
+                        variants={cardContentItemVariants}
+                        className="font-sans text-[22px] sm:text-[24px] text-[#111827] uppercase font-normal leading-tight mb-1 pt-0.5"
+                      >
                         {activeService.title}
-                      </h3>
+                      </motion.h3>
 
-                      <p className="text-accent-strong text-[11px] font-medium font-montserrat mb-2 leading-snug">
+                      <motion.p
+                        variants={cardContentItemVariants}
+                        className="text-accent-strong text-[12.5px] sm:text-[13px] font-medium font-montserrat mb-2 leading-snug"
+                      >
                         {activeService.tagline}
-                      </p>
+                      </motion.p>
                     </div>
 
                     {/* Card Middle: Description & Outcomes (overflow-y-auto for internal scrolling on smaller screens) */}
                     <div className="flex-1 overflow-y-auto no-scrollbar pr-0.5 space-y-2.5 min-h-0">
-                      <p className="text-[#1A1A1A] text-xs leading-relaxed font-normal font-montserrat">
+                      <motion.p
+                        variants={cardContentItemVariants}
+                        className="text-[#1A1A1A] text-[13.5px] sm:text-[14px] leading-relaxed font-normal font-montserrat"
+                      >
                         {activeService.description}
-                      </p>
+                      </motion.p>
 
-                      <div className="p-3 rounded-xl bg-white/90 border border-border-blue/70 shadow-2xs">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-accent block mb-1.5 font-montserrat">
+                      <motion.div
+                        variants={cardContentItemVariants}
+                        className="p-3 rounded-xl bg-white/90 border border-border-blue/70 shadow-2xs"
+                      >
+                        <span className="text-[11.5px] font-bold uppercase tracking-wider text-accent block mb-1.5 font-montserrat">
                           Expected Clinical Outcomes
                         </span>
                         <ul className="space-y-1">
                           {activeService.expectedOutcomes.slice(0, 2).map((item, i) => (
-                            <li key={i} className="flex items-start gap-1.5 text-[11px] text-[#1A1A1A] font-montserrat">
-                              <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1 flex-shrink-0" />
+                            <li key={i} className="flex items-start gap-1.5 text-[12.5px] sm:text-[13px] text-[#1A1A1A] font-montserrat leading-snug">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                               <span className="line-clamp-2">{item}</span>
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     </div>
 
                     {/* Card Bottom: Book Consultation Button (flex-shrink-0, permanently visible) */}
                     <div className="pt-2.5 border-t border-[#DCE8F1] flex justify-center flex-shrink-0 mt-2">
-                      <button
+                      <motion.button
+                        whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                         onClick={() => onBookService(activeService.id)}
-                        className="w-full group inline-flex items-center justify-between gap-2 pl-5 pr-1.5 py-2 rounded-full bg-accent text-white hover:bg-accent-strong transition-all duration-300 shadow-[0_4px_16px_rgba(66,169,229,0.3)] cursor-pointer select-none active:scale-[0.98] min-h-[44px]"
+                        className="w-full group inline-flex items-center justify-between gap-2 pl-5 pr-1.5 py-2 rounded-full bg-accent text-white hover:bg-accent-strong transition-all duration-300 shadow-[0_4px_16px_rgba(66,169,229,0.3)] cursor-pointer select-none active:scale-[0.98] min-h-[46px]"
                       >
-                        <span className="font-montserrat text-xs font-semibold tracking-wide mx-auto">
+                        <span className="font-montserrat text-[13.5px] font-semibold tracking-wide mx-auto">
                           Book Consultation
                         </span>
                         <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-white/30 flex items-center justify-center transition-all duration-300 flex-shrink-0">
                           <ArrowUpRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </span>
-                      </button>
+                      </motion.button>
                     </div>
                   </motion.div>
                 </AnimatePresence>

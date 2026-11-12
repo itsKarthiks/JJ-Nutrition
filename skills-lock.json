@@ -1,65 +1,71 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "banner-design": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/banner-design/SKILL.md",
-      "computedHash": "0645bfc33632c7b332e649e35738ea807e1571436289cdaf86bebe6660c693ec"
+      "computedHash": "4b22f6f48afc6fcd72e6f3ae106a4dca11b33b88221efded1f5c62d8f9afb50d"
     },
     "brand": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/brand/SKILL.md",
-      "computedHash": "105287ad08d5baa5948522df45ba6d291b5ccfacc4b5a8ae3282b1e92b412496"
+      "computedHash": "d5619310b76bd204efd2f8b3832f72b5a2899712be0ab94d1b4b671271419c54"
     },
     "design": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/design/SKILL.md",
-      "computedHash": "d1cbc4bc8f0bd4273fae84014c6576615b13508743cd9c5240d721dc5143dc83"
+      "computedHash": "029cd8e3c45bab68f017e8aeaa18edd8c980e63445ce3915d64e7b5f5bb11be6"
     },
     "design-mode": {
       "source": "SandeepBaskaran/design-mode",
       "sourceType": "github",
       "skillPath": "website/public/.well-known/agent-skills/design-mode/SKILL.md",
-      "computedHash": "21af172f1d1de2b12cabb5b11f7daec4a1ff9e4bc00985af711887703df6acdb"
+      "computedHash": "eaf30bc6249716a5ce6982690b876e2bad4e9e86cbd9f0dc1c792f9da79c89a2"
     },
     "design-system": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/design-system/SKILL.md",
-      "computedHash": "a8d1f1cd0f55979a872a2ce9717d3c33df23b0c378738b8d6adb574bfb266c77"
+      "computedHash": "f711176c54dedef1dd16865a54882cb635b7b9f6b03c7aa15440d7096bc0ac4e"
     },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "a149f6321502631ef180eb193e713d434f126554ee01e342f6f6e7fb12002b62"
+      "computedHash": "4da5d352ab041b954e64f9b98b0f05c7ab1630c20f00a679cd19fad28516639d"
+    },
+    "mobile-native": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/mobile-native/SKILL.md",
+      "computedHash": "2141766c0a370128cbee3dc004d3f254a411e54f8352e154e73b040e52070e38"
     },
     "slides": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/slides/SKILL.md",
-      "computedHash": "c27a4e6f6101cb45f9a717888784aba649c1c516cd1a1e9871f630ab15ad1800"
+      "computedHash": "059825b15a508a5f1533ab646f968ffcbcdbb8eadd76c2d122151bfbcf19d287"
     },
     "ui-styling": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/ui-styling/SKILL.md",
-      "computedHash": "fa6d85097b0c131fb8708a6e7e08aff2af12fd2966cfe0a73bd258dcac99ea5b"
+      "computedHash": "6f43cd27b520e201041f00607a8ae758a74f8a704c4a22bfa9fdff84b7f9e921"
     },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
-      "computedHash": "3bf6ba3aead8c890cb3cb43480b8588a9dc292465204795b10a66b62504ad1d2"
+      "computedHash": "5811994f2a037d21f5437c4ebf87640d91f2d0ae5b1a3bc9c9250bef42f174af"
     },
     "unslop": {
       "source": "theclaymethod/unslop",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "5ce98681a9faa27091f096050e8f3288e4f436177047c3c9c5e8282fe3f8d589"
+      "computedHash": ""
     }
   }
 }
