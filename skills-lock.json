@@ -7,6 +7,12 @@
       "skillPath": ".claude/skills/banner-design/SKILL.md",
       "computedHash": "4b22f6f48afc6fcd72e6f3ae106a4dca11b33b88221efded1f5c62d8f9afb50d"
     },
+    "brag": {
+      "source": "latent-spaces/brag",
+      "sourceType": "github",
+      "skillPath": "skills/brag/SKILL.md",
+      "computedHash": "6eefb4ac1485fd9834ea42c70a789bcc532cb6cf17f9f82925be8cdc681b0d75"
+    },
     "brand": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
